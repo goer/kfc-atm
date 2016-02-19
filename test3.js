@@ -1,3 +1,5 @@
+var sleep = require('sleep');
+
 var webdriver = require('selenium-webdriver'),
     By = require('selenium-webdriver').By,
     until = require('selenium-webdriver').until;
@@ -23,6 +25,10 @@ driver.findElement(By.name('passwordEncryption')).clear();
 driver.findElement(By.name('passwordEncryption')).sendKeys('Bsm1theA');
 
 driver.findElement(By.id('button')).click();
+
+
+try{
+
 
 driver.switchTo().frame('menuFrame')
 driver.findElement(By.linkText('Informasi Rekening')).click();
@@ -50,6 +56,8 @@ driver.executeScript(
 	d3
 );
 
+
+
 //driver.findElement(By.name('show1')).click();
 
 // driver.findElement(By.tagName("BODY")).getText().then(function(content){
@@ -59,12 +67,16 @@ driver.executeScript(
 
 //name=customFile
 var selectCSV=driver.findElement(By.name('customFile'))
-selectCSV.click().then(function(){
+selectCSV.sendKeys('CSV')
+
+// selectCSV.click().then(function(){
 	
-	//selectCSV.findElement(By.css("option[value='CSV']")).click()
-	selectCSV.findElement(By.css(".clsForm > tbody:nth-child(1) > select:nth-child(12) > option:nth-child(5)")).click()
-})
+// 	//selectCSV.findElement(By.css("option[value='CSV']")).click()
+// 	selectCSV.findElement(By.css("option:nth-child(2)")).click()
+// 	
+// })
 driver.findElement(By.name('download1')).click();
+
 
 driver.switchTo(null);
 driver.switchTo().frame(null);
@@ -78,11 +90,29 @@ driver.switchTo().frame('mainFrame')
 
 driver.findElement(By.name('chkBox')).click();
 driver.findElement(By.name('download')).click();
+
+
+sleep.sleep(2000)
+
 driver.findElement(By.name('delete')).click();
+sleep.sleep(500)
+driver.switchTo().alert().accept();
+
+}catch(err){
+
+
+}finally{
 
 driver.switchTo(null);
 driver.switchTo().frame(null);
 driver.switchTo().frame('topFrame')
 driver.findElement(By.css("div.button_out")).click();
 
+
+
 driver.quit();
+
+
+}
+
+
