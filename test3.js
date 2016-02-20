@@ -1,4 +1,4 @@
-var sleep = require('sleep');
+
 
 var webdriver = require('selenium-webdriver'),
     By = require('selenium-webdriver').By,
@@ -30,87 +30,116 @@ driver.findElement(By.id('button')).click();
 try{
 
 
-driver.switchTo().frame('menuFrame')
-driver.findElement(By.linkText('Informasi Rekening')).click();
-driver.findElement(By.id('subs9')).click();
+	driver.switchTo().frame('menuFrame')
+	driver.findElement(By.linkText('Informasi Rekening')).click();
+	driver.findElement(By.id('subs9')).click();
 
-driver.switchTo(null);
-driver.switchTo().frame(null);
-driver.switchTo().frame('mainFrame')
+	driver.switchTo(null);
+	driver.switchTo().frame(null);
+	driver.switchTo().frame('mainFrame')
 
-var d1=driver.findElement(By.name('transferDateDay1'));
-driver.executeScript(
-	'arguments[0].value=1',
-	d1
-);
+	var d1=driver.findElement(By.name('transferDateDay1'));
+	d1.click();
+	driver.executeScript(
+		'arguments[0].value=1',
+		d1
+	);
 
-var d2=driver.findElement(By.name('transferDateMonth1'))
-driver.executeScript(
-	'arguments[0].value=2',
-	d2
-);
+	var d2=driver.findElement(By.name('transferDateMonth1'))
+	d2.click();
+	driver.executeScript(
+		'arguments[0].value=2',
+		d2
+	);
 
-var d3=driver.findElement(By.name('transferDateYear1'))
-driver.executeScript(
-	'arguments[0].value=2016',
-	d3
-);
+	var d3=driver.findElement(By.name('transferDateYear1'))
+	d3.click();
+	driver.executeScript(
+		'arguments[0].value=2016',
+		d3
+	);
 
+	//driver.sleep(10000);
 
+	//driver.findElement(By.name('show1')).click();
 
-//driver.findElement(By.name('show1')).click();
+	// driver.findElement(By.tagName("BODY")).getText().then(function(content){
+	// 	console.log('Content:');
+	// 	console.log(content);
+	// });
 
-// driver.findElement(By.tagName("BODY")).getText().then(function(content){
-// 	console.log('Content:');
-// 	console.log(content);
-// });
+	//name=customFile
+	var selectCSV=driver.findElement(By.name('customFile'))
+	selectCSV.sendKeys('Text')
 
-//name=customFile
-var selectCSV=driver.findElement(By.name('customFile'))
-selectCSV.sendKeys('CSV')
-
-// selectCSV.click().then(function(){
-	
-// 	//selectCSV.findElement(By.css("option[value='CSV']")).click()
-// 	selectCSV.findElement(By.css("option:nth-child(2)")).click()
-// 	
-// })
-driver.findElement(By.name('download1')).click();
-
-
-driver.switchTo(null);
-driver.switchTo().frame(null);
-driver.switchTo().frame('menuFrame')
-driver.findElement(By.linkText('Unduh Laporan')).click();
-driver.findElement(By.id('subs33')).click();
-
-driver.switchTo(null);
-driver.switchTo().frame(null);
-driver.switchTo().frame('mainFrame')
-
-driver.findElement(By.name('chkBox')).click();
-driver.findElement(By.name('download')).click();
+	// selectCSV.click().then(function(){
+		
+	// 	//selectCSV.findElement(By.css("option[value='CSV']")).click()
+	// 	selectCSV.findElement(By.css("option:nth-child(2)")).click()
+	// 	
+	// })
+	driver.findElement(By.name('download1')).click();
 
 
-sleep.sleep(2000)
+	driver.switchTo(null);
+	driver.switchTo().frame(null);
+	driver.switchTo().frame('menuFrame')
+	driver.findElement(By.linkText('Unduh Laporan')).click();
+	driver.findElement(By.id('subs33')).click();
 
-driver.findElement(By.name('delete')).click();
-sleep.sleep(500)
-driver.switchTo().alert().accept();
+	//driver.sleep(10000);
+
+	driver.switchTo(null);
+	driver.switchTo().frame(null);
+	driver.switchTo().frame('mainFrame')
+
+	driver.findElement(By.name('chkBox')).click();
+	driver.findElement(By.name('download')).click().then(function(){
+
+	driver.switchTo().alert().accept();	
+
+	//driver.sleep(10000);
+
+	driver.findElement(By.name('chkParent')).click();
+	driver.findElement(By.name('delete')).click();
+
+	driver.switchTo().alert().accept();
+
+	driver.switchTo(null);
+	driver.switchTo().frame(null);
+	driver.switchTo().frame('topFrame')
+	driver.findElement(By.css("div.button_out")).click();
+
+	driver.sleep(5000);
+	driver.quit();
+
+
+
+	})
+
+
+
+
+
+
 
 }catch(err){
 
 
 }finally{
 
-driver.switchTo(null);
-driver.switchTo().frame(null);
-driver.switchTo().frame('topFrame')
-driver.findElement(By.css("div.button_out")).click();
+	
+
+
+		// driver.switchTo(null);
+		// driver.switchTo().frame(null);
+		// driver.switchTo().frame('topFrame')
+		// driver.findElement(By.css("div.button_out")).click();
+		// driver.quit();
 
 
 
-driver.quit();
+	
 
 
 }
