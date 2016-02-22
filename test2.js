@@ -80,35 +80,59 @@ function getMandiriBisnis(){
 		// );
 
 		driver.findElement(By.name('show1')).click();
+		driver.sleep(1000);
+
+		driver.switchTo(null);
+		driver.switchTo().frame(null);
+		driver.switchTo().frame('mainFrame')
 
 
-		try{
+		//if(driver.findElements(By.linkText('Akhir')).size() > 0){
+			//driver.findElement(By.linkText('Akhir')).click();
+			
+			driver.executeScript('onClickLast();');
+			driver.sleep(1000);
 
-			//if(driver.findElements(By.linkText('Akhir')).size() > 0){
-				driver.findElement(By.linkText('Akhir')).click();
-				//driver.sleep(1000);
-			//}
+		//}
 
-		}finally{
+		driver.switchTo(null);
+		driver.switchTo().frame(null);
+		driver.switchTo().frame('mainFrame')
+
+		var b='BODY'
+		// if( driver.findElements(By.tagName("body")).size() != 0 ){
+		// 	b='body';
+		// }
+
+		console.log('tag body: '+b)
+		driver.findElement(By.tagName(b)).getText().then(function(content){
+			send(content)
+		});
 
 
-			driver.findElement(By.tagName("body")).getText().then(function(content){
+		driver.switchTo(null);
+		driver.switchTo().frame(null);
+		driver.switchTo().frame('mainFrame')
 
-				var s= new Buffer(content).toString('base64')
-				var unirest = require('unirest');
-				console.log('Content:');
-				console.log(content);
-				unirest.post('http://52.77.35.254/index.php/api/mandiri/payment')
-					// .set('Content-Type', 'text/plain')
-					.send('text='+s)
-					.end(function (response) {
-				  		console.log(response.body);
-					});
 
-			});
+		driver.executeScript('onClickPrev();');
+		driver.sleep(1000);
 
-		}
+		//}
 
+		driver.switchTo(null);
+		driver.switchTo().frame(null);
+		driver.switchTo().frame('mainFrame')
+
+		var b='BODY'
+		// if( driver.findElements(By.tagName("body")).size() != 0 ){
+		// 	b='body';
+		// }
+
+		console.log('tag body: '+b)
+		driver.findElement(By.tagName(b)).getText().then(function(content){
+			send(content)
+		});
 
 
 
@@ -130,7 +154,18 @@ function getMandiriBisnis(){
 
 }
 
-
+function send(content){
+	var s= new Buffer(content).toString('base64')
+			var unirest = require('unirest');
+			console.log('Content:');
+			console.log(content);
+			unirest.post('http://52.77.35.254/index.php/api/mandiri/payment')
+				// .set('Content-Type', 'text/plain')
+				.send('text='+s)
+				.end(function (response) {
+			  		console.log(response.body);
+				});
+}
 // var loop = require('serial-loop')
  
 // loop(10, each, function (error) {
