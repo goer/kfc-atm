@@ -84,9 +84,9 @@ function getMandiriBisnis(){
 
 		try{
 
-			if(driver.findElements(By.linkText('Akhir')).size() > 0){
+			//if(driver.findElements(By.linkText('Akhir')).size() > 0){
 				driver.findElement(By.linkText('Akhir')).click();
-			}
+			//}
 
 		}finally{
 
