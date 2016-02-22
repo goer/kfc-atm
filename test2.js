@@ -86,12 +86,13 @@ function getMandiriBisnis(){
 
 			//if(driver.findElements(By.linkText('Akhir')).size() > 0){
 				driver.findElement(By.linkText('Akhir')).click();
+				driver.sleep(1000);
 			//}
 
 		}finally{
 
 
-			driver.findElement(By.tagName("BODY")).getText().then(function(content){
+			driver.findElement(By.tagName("body")).getText().then(function(content){
 
 				var s= new Buffer(content).toString('base64')
 				var unirest = require('unirest');

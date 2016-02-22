@@ -1,5 +1,5 @@
-<?
-date_default_timezone_set('Asian/Jakarta');
+<?php
+//date_default_timezone_set('Asian/Jakarta');
 $i=0;
 while(true){
 	
